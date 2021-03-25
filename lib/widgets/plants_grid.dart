@@ -10,15 +10,15 @@ class PlantsGrid extends StatelessWidget {
     final plants = plantsProvider.plants;
 
     return GridView.builder(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(15.0),
       itemCount: plants.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
         value: plants[i],
         child: PlantTile(plant: plants[i])
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1,
+        crossAxisCount: 1,
+        childAspectRatio: 3 /2,
         crossAxisSpacing: 15,
         mainAxisSpacing: 15
       ),

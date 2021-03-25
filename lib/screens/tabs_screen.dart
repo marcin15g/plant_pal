@@ -5,6 +5,7 @@ import 'package:plantpal/screens/assistant_screen.dart';
 import 'package:plantpal/screens/collection_screen.dart';
 import 'package:plantpal/screens/plants_overview_screen.dart';
 import 'package:plantpal/widgets/main_drawer.dart';
+import 'package:plantpal/widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 
 class TabScreen extends StatefulWidget {
@@ -29,11 +30,29 @@ class _TabScreenState extends State<TabScreen> {
     });
   }
 
+  void _searchForPlants(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(child: SearchBar(),);
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title'])
+        title: Text(_pages[_selectedPageIndex]['title']),
+        actions: _selectedPageIndex == 1 ? <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () => _searchForPlants(context),
+              child: Icon(Icons.search, size: 24.0,),
+            ),
+          )
+        ] : null,
       ),
       drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]['page'],

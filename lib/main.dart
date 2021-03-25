@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantpal/providers/plants.dart';
+import 'package:plantpal/screens/plant_details_screen.dart';
 import 'package:plantpal/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
 void main() => runApp(MyApp());
@@ -21,7 +22,9 @@ class MyApp extends StatelessWidget {
           canvasColor: Color.fromRGBO(255, 254, 229, 1),
         ),
         home: TabScreen(),
-
+        routes: {
+          PlantDetailScreen.routeName: (ctx) => PlantDetailScreen(),
+        },
       ),
     );
   }
