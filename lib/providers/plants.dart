@@ -46,6 +46,7 @@ class Plants with ChangeNotifier {
         fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
       }
       _plants = fetchedPlants;
+      _plants.forEach((element) {print(element.imageUrl);});
       notifyListeners();
     }
     else {

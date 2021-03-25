@@ -7,6 +7,8 @@ class PlantTile extends StatelessWidget {
 
   PlantTile({this.plant});
 
+  
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -19,7 +21,7 @@ class PlantTile extends StatelessWidget {
               arguments: {'id': plant.id, 'name': plant.commonName}
             );
           },
-          child: Image.network(plant.imageUrl, fit: BoxFit.cover),
+          child: plant.imageUrl != null ? FadeInImage.assetNetwork(placeholder: 'assets/placeholder.jpg', image: plant.imageUrl, fit: BoxFit.cover,) : Image.asset('assets/placeholder.jpg', fit: BoxFit.cover,)
         ),
         footer: Container(
           height: 80,
@@ -38,7 +40,7 @@ class PlantTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    plant.commonName,
+                    plant.commonName != null ? plant.commonName : '',
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       color: Colors.white,
@@ -46,7 +48,7 @@ class PlantTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    plant.scientificName,
+                    plant.scientificName != null ? plant.scientificName : '',
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       color: Colors.white70,
