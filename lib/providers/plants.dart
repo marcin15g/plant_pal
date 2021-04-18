@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:plantpal/models/plant.dart';
 import 'package:plantpal/models/plant_details.dart';
 
@@ -14,6 +15,15 @@ class Plants with ChangeNotifier {
   List<Plant> get plants {
     return [..._plants];
   }
+
+  Object polishNames = {};
+
+  Future<void> getPolishNamesFromJSON() async {
+    print("ASDASDASDASD");
+    polishNames = json.decode(await rootBundle.loadString('polish_names.json'));
+    print('LUBIE PLACKI');
+    print(polishNames);
+  } 
 
   Future<void> fetchDemoPlants() async {
     final url = Uri.https('trefle.io', 'api/v1/plants', {'token': token});
@@ -50,7 +60,7 @@ class Plants with ChangeNotifier {
       notifyListeners();
     }
     else {
-      throw Exception('Failed to load demo plants');
+      throw Exception('Failed to load plants');
     }   
   }
 

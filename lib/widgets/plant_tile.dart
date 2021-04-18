@@ -29,10 +29,11 @@ class PlantTile extends StatelessWidget {
             backgroundColor: Colors.black54,
             leading: Container(
                 margin: EdgeInsets.all(10),
-                child: Icon(
-                  Icons.favorite,
-                  color: Colors.grey,
-                )),
+                // child: Icon(
+                //   Icons.favorite,
+                //   color: Colors.grey,
+                // )),
+            ),
             title: Container(
               alignment: Alignment.centerRight,
               margin: EdgeInsets.only(right: 10),

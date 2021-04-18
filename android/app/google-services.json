@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1050201998056",
+    "project_id": "plantpal-c64c7",
+    "storage_bucket": "plantpal-c64c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050201998056:android:ac30e2cbe909fcdc6b3f5d",
+        "android_client_info": {
+          "package_name": "com.example.plantpal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050201998056-pdnu2k61pfmef6o6dpbcr8ctmf5mhjb8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.plantpal",
+            "certificate_hash": "d21976e8a2509eb641f94c246c71022bd97e0be6"
+          }
+        },
+        {
+          "client_id": "1050201998056-ftv3bi7on8jrrajrji0dob2e0g5qqsea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6RqIEenxAIxJZMyRoK2WWYmF4inWrBhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050201998056-ftv3bi7on8jrrajrji0dob2e0g5qqsea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

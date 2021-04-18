@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plantpal/models/plant.dart';
 import 'package:plantpal/providers/plants.dart';
@@ -9,6 +10,9 @@ import 'package:plantpal/widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 
 class TabScreen extends StatefulWidget {
+  
+  static const routeName = '/tabs';
+  
   @override
   _TabScreenState createState() => _TabScreenState();
 }
@@ -41,6 +45,9 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Map<String, User> userInfo = ModalRoute.of(context).settings.arguments as Map<String, User>;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title']),
@@ -54,7 +61,7 @@ class _TabScreenState extends State<TabScreen> {
           )
         ] : null,
       ),
-      drawer: MainDrawer(),
+      drawer: MainDrawer(userInfo),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) =>_selectPage(index),
