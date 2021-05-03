@@ -1,6 +1,7 @@
-import 'dart:convert';
+import 'dart:convert' as convert;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:plantpal/models/plant.dart';
@@ -16,32 +17,33 @@ class Plants with ChangeNotifier {
     return [..._plants];
   }
 
-  Object polishNames = {};
-
-  Future<void> getPolishNamesFromJSON() async {
-    print("ASDASDASDASD");
-    polishNames = json.decode(await rootBundle.loadString('polish_names.json'));
-    print('LUBIE PLACKI');
-    print(polishNames);
-  } 
-
   Future<void> fetchDemoPlants() async {
-    final url = Uri.https('trefle.io', 'api/v1/plants', {'token': token});
-    final http.Response response = await http.get(url);
+    // final url = Uri.https('trefle.io', 'api/v1/plants', {'token': token});
+    // final http.Response response = await http.get(url);
+    // List<Plant> fetchedPlants = [];
+
+    // if(response.statusCode == 200) {
+    //   final jsonDataArray = jsonDecode(response.body)['data'];
+
+    //   for(var i=0; i<jsonDataArray.length; i++) {
+    //     fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
+    //   }
+    //   _plants = fetchedPlants;
+    //   notifyListeners();
+    // }
+    // else {
+    //   throw Exception('Failed to load demo plants');
+    // }
+    // 
     List<Plant> fetchedPlants = [];
-
-    if(response.statusCode == 200) {
-      final jsonDataArray = jsonDecode(response.body)['data'];
-
-      for(var i=0; i<jsonDataArray.length; i++) {
-        fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
-      }
+    var jsonDataArray = convert.jsonDecode(await rootBundle.loadString('assets/json/demo/demo.json'));
+    print(jsonDataArray);
+    for(var i=0; i<jsonDataArray.length; i++) {
+      fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
+    }
+      print(fetchedPlants);
       _plants = fetchedPlants;
-      notifyListeners();
-    }
-    else {
-      throw Exception('Failed to load demo plants');
-    }
+      notifyListeners();   
   }
 
   Future<void> searchForPlants(String searchInput) async {
@@ -50,7 +52,7 @@ class Plants with ChangeNotifier {
     List<Plant> fetchedPlants = [];
 
     if(response.statusCode == 200) {
-      final jsonDataArray = jsonDecode(response.body)['data'];
+      final jsonDataArray = convert.jsonDecode(response.body)['data'];
 
       for(var i=0; i<jsonDataArray.length; i++) {
         fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
@@ -65,19 +67,23 @@ class Plants with ChangeNotifier {
   }
 
   Future<PlantDetails> fetchPlantDetails(int plantId) async {
-    final url = Uri.https('trefle.io', 'api/v1/plants/${plantId.toString()}', {'token': token});
-    final http.Response response = await http.get(url);
+  //   final url = Uri.https('trefle.io', 'api/v1/plants/${plantId.toString()}', {'token': token});
+  //   final http.Response response = await http.get(url);
 
-    if(response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body)['data'];
+  //   if(response.statusCode == 200) {
+  //     final jsonData = convert.jsonDecode(response.body)['data'];
+  //     final plantDetails = PlantDetails.fromJson(jsonData);
+
+  //     print(jsonData);
+  //     return plantDetails;
+  //     // return jsonData;
+  //   }
+  //   else {
+  //     throw Exception('Failed to load plant details');
+  //   }    
+  // 
+      var jsonData = convert.jsonDecode(await rootBundle.loadString('assets/json/demo/details.json'));
       final plantDetails = PlantDetails.fromJson(jsonData);
-
-      print(jsonData);
       return plantDetails;
-      // return jsonData;
-    }
-    else {
-      throw Exception('Failed to load plant details');
-    }    
   }
 }

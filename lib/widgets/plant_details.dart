@@ -13,7 +13,7 @@ class PlantDetailsWidget extends StatelessWidget {
         children: [
           Container(
             child: getImage(plantInfo.imageUrl),
-            height: MediaQuery.of(context).size.height * 0.45,
+            height: MediaQuery.of(context).size.height * 0.6,
             width: double.infinity,
           ),
           Container(
