@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plantpal/screens/login.dart';
 import 'package:plantpal/auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainDrawer extends StatelessWidget {
   final Map<String, User> userInfo;
@@ -44,20 +45,19 @@ class MainDrawer extends StatelessWidget {
                           ),
                         ),
                         ListTile(
-                          title: Text('Item 1'),
-                          onTap: () {},
+                          leading: Icon(Icons.api),
+                          title: Text('More about Trefle.io'),
+                          onTap: () {_launchURL('https://trefle.io');},
                         ),
                         ListTile(
-                          title: Text('Item 2'),
-                          onTap: () {},
+                          leading: Icon(Icons.code),
+                          title: Text('Checkout this project on GitHub'),
+                          onTap: () {_launchURL("https://github.com/marcin15g/plant_pal");},
                         ),
                         ListTile(
-                          title: Text('Item 3'),
-                          onTap: () {},
-                        ),
-                        ListTile(
-                          title: Text('Item 4'),
-                          onTap: () {},
+                          leading: Icon(Icons.list_alt),
+                          title: Text('Flutter Documentation'),
+                          onTap: () {_launchURL('https://flutter.dev/docs');},
                         ),
                       ],
                     ),
@@ -101,6 +101,9 @@ class MainDrawer extends StatelessWidget {
     );
   }
 }
+
+_launchURL(String url) async => await canLaunch(url) ? await launch(url) : throw "Can't launch";
+
 
 // DrawerHeader(
 //   padding: EdgeInsets.zero,
