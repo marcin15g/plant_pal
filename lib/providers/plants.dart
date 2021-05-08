@@ -1,9 +1,13 @@
 import 'dart:convert' as convert;
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:plantpal/database.dart';
+import 'package:plantpal/models/collection_plant.dart';
 import 'package:plantpal/models/plant.dart';
 import 'package:plantpal/models/plant_details.dart';
 
@@ -11,10 +15,33 @@ class Plants with ChangeNotifier {
   
   static String token = 'tGDID0HQZK1PpArN2eGAKyoV5j7uiNcT2UJedHoR5H0';
 
+
   List<Plant> _plants = [];
+  List<CollectionPlant> _collectionPlants = [];
 
   List<Plant> get plants {
     return [..._plants];
+  }
+
+  List<CollectionPlant> get collectionPlants {
+    return [..._collectionPlants];
+  }
+
+  Future<void> fetchCollectionPlants() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final String uid = auth.currentUser.uid;
+    final List<CollectionPlant> collPlantsArray = [];
+
+
+    DataSnapshot snapshot = await fetchCollectionPlantsFromDB(uid);
+    snapshot.value.forEach((key, value) => {
+      collPlantsArray.add(CollectionPlant.fromSnapshot(key, value))
+    });
+
+    _collectionPlants = collPlantsArray;
+    print("TEST");
+    print(_collectionPlants);
+    notifyListeners();
   }
 
   Future<void> fetchDemoPlants() async {

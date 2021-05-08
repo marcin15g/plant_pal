@@ -21,4 +21,12 @@ class Plant with ChangeNotifier {
       imageUrl: json['image_url']
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'commonName': this.commonName,
+      'scientificName': this.scientificName,
+      'imageUrl': this.imageUrl
+    };
+  }
 }
