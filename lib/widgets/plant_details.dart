@@ -8,15 +8,19 @@ class PlantDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            child: getImage(plantInfo.imageUrl),
-            height: MediaQuery.of(context).size.height * 0.6,
-            width: double.infinity,
-          ),
-          Container(
+    print(plantInfo);
+    return Stack(
+      children: [
+        Container(
+          child: getImage(plantInfo.imageUrl),
+          height: MediaQuery.of(context).size.height * 0.8,
+          width: double.infinity,
+        ),
+        SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.65,
+            ),
             width: double.infinity,
             transform: Matrix4.translationValues(0.0, -50.0, 0.0),
             decoration: new BoxDecoration(
@@ -24,40 +28,60 @@ class PlantDetailsWidget extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(50.0),
                     topRight: const Radius.circular(50.0))),
-            child: Column(
-              children: [
-                Container(
-                  height: 100.0,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  transform: Matrix4.translationValues(0.0, -50.0, 0.0),
-                  child: Card(
-                    elevation: 10.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          plantInfo.commonName,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30.0),
-                        ),
-                        Text(
-                          plantInfo.scientificName,
-                          style: TextStyle(
-                            fontSize: 18.0
+            child: Container(
+              child: Column(
+                children: [
+                  Container(
+                    transform: Matrix4.translationValues(0.0, -50.0, 0.0),
+                    // margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.2),
+                    height: 100.0,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Card(
+                      elevation: 10.0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            plantInfo.commonName,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 30.0),
                           ),
-                        )
-                      ],
+                          Text(
+                            plantInfo.scientificName,
+                            style: TextStyle(fontSize: 18.0),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Text('Im a test')
-              ],
+                  infoRow("Year", plantInfo.year.toString(),
+                      Icons.calendar_today, context),
+                  infoRow("Bibliography", plantInfo.bibliography.toString(),
+                      Icons.book, context),
+                  infoRow("Family", plantInfo.familyCommonName.toString(),
+                      Icons.supervised_user_circle_sharp, context),
+                  infoRow("Observations", plantInfo.observations.toString(),
+                      Icons.search_rounded, context),
+                  infoRow("Observations", plantInfo.observations.toString(),
+                      Icons.calendar_today, context),
+                  infoRow("Observations", plantInfo.observations.toString(),
+                      Icons.calendar_today, context),
+                  infoRow("Observations", plantInfo.observations.toString(),
+                      Icons.calendar_today, context),
+                  infoRow("Observations", plantInfo.observations.toString(),
+                      Icons.calendar_today, context),
+                  plantInfo.edible
+                      ? infoRow("Edible part", plantInfo.ediblePart.toString(),
+                          Icons.calendar_today, context)
+                      : SizedBox()
+                ],
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -75,29 +99,63 @@ getImage(String url) {
         );
 }
 
-infoRow(String title, String value, Icon icon, BuildContext context) {
+infoRow(String title, String value, IconData icon, BuildContext context) {
   return Container(
+    margin: EdgeInsets.all(10.0),
     width: double.infinity,
-    height: 100.0,
+    height: 80.0,
     child: Padding(
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.symmetric(horizontal: 0.0),
       child: Card(
-        color: Colors.green,
+        color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         elevation: 5.0,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            icon,
-            Text(title),
             Card(
-              color: Colors.white,
+              color: Colors.green,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0)),
-              child: Text(
-                value,
-                style: TextStyle(fontSize: 20.0),
+                  borderRadius: BorderRadius.circular(50)),
+              elevation: 5.0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 10.0),
+                      child: Icon(
+                        icon,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      value,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

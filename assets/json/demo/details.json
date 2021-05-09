@@ -1,12 +1,12 @@
 {
     "id": 123123,
-    "common_name": "Common Name",
-    "scientific_name": "Scientific Name",
+    "common_name": "Tarovine",
+    "scientific_name": "Monstera deliciosa",
     "image_url": "https://a.allegroimg.com/original/11b8ba/6b346dd041be978a68278ca7ff74/Najpiekniejsza-Monstera-deliciosa-DZIURAWA-roz-M",
-    "year": 1997,
-    "bibliography": "bibliography",
-    "family_common_name": "family_common_name",
-    "observations": "observations",
+    "year": 1849,
+    "bibliography": "Vidensk. Meddel. Naturhist. Foren. Kjøbenhavn 1: 19 (1849)",
+    "family_common_name": "Araceae",
+    "observations": "Mexico",
     "vegetable": false,
     "edible": false,
     "edible_part": null
