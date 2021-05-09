@@ -1,68 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:plantpal/database.dart';
 import 'package:plantpal/models/collection_plant.dart';
+import 'package:plantpal/providers/plants.dart';
+import 'package:plantpal/screens/new_plant_screen.dart';
+import 'package:provider/provider.dart';
 
 class CollectionPlantTile extends StatelessWidget {
-
   final CollectionPlant plant;
   CollectionPlantTile({this.plant});
 
   @override
-Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        child: GestureDetector(
-          onTap: () {
-            // Navigator.of(context).pushNamed(
-            //   PlantDetailScreen.routeName,
-            //   arguments: {'id': plant.id, 'name': plant.commonName}
-            // );
-            print('TAP');
-          },
-          onLongPress: () {
-            print('LONG PRESS');
-          },
-          child: plant.imageUrl != null ? FadeInImage.assetNetwork(placeholder: 'assets/placeholder.jpg', image: plant.imageUrl, fit: BoxFit.cover,) : Image.asset('assets/placeholder.jpg', fit: BoxFit.cover,)
+  Widget build(BuildContext context) {
+    final plantsProvider = Provider.of<Plants>(context);
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: GridTile(
+                child: plant.imageUrl != null
+                    ? FadeInImage.assetNetwork(
+                        placeholder: 'assets/placeholder.jpg',
+                        image: plant.imageUrl,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        'assets/placeholder.jpg',
+                        fit: BoxFit.cover,
+                      )),
+          ),
         ),
-        // footer: Container(
-        //   height: 80,
-        //   child: GridTileBar(
-        //     backgroundColor: Colors.black54,
-        //     leading: Container(
-        //         margin: EdgeInsets.all(10),
-        //         // child: Icon(
-        //         //   Icons.favorite,
-        //         //   color: Colors.grey,
-        //         // )),
-        //     ),
-        //     title: Container(
-        //       alignment: Alignment.centerRight,
-        //       margin: EdgeInsets.only(right: 10),
-        //       child: Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: [
-        //           Text(
-        //             plant.commonName != null ? plant.commonName : '',
-        //             textAlign: TextAlign.end,
-        //             style: TextStyle(
-        //               color: Colors.white,
-        //               fontSize: 30,
-        //             ),
-        //           ),
-        //           Text(
-        //             plant.scientificName != null ? plant.scientificName : '',
-        //             textAlign: TextAlign.end,
-        //             style: TextStyle(
-        //               color: Colors.white70,
-        //               fontSize: 20,
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // ),
-      ),
+        Positioned.fill(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: Colors.green,
+              borderRadius: BorderRadius.circular(10),
+              onLongPress: () {
+                showAlertDialog(context, plantsProvider,  plant);
+              },
+            ),
+          ),
+        )
+      ],
     );
   }
+}
+
+showAlertDialog(BuildContext context, Plants plantsProvider, CollectionPlant plant) {
+
+  
+  // Edit Button
+  Widget editButton = ElevatedButton(
+    child: Text("EDIT"),
+    onPressed: () {
+      print("EDIT");
+      Navigator.of(context).pop();
+      Navigator.of(context).pushNamed(NewPlantScreen.routeName, arguments: {'plant': plant,});
+    },
+  );
+  Widget removeButton = ElevatedButton(
+    child: Text("REMOVE"),
+    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
+    onPressed: () {
+      removeCollectionPlant(plant.id);
+      plantsProvider.fetchCollectionPlants();
+      Navigator.of(context).pop();
+    },
+  );
+
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    titlePadding: EdgeInsets.all(0.0),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(20.0),
+      ),
+    ),
+    title: Container(
+      height: 200.0,
+      width: double.infinity,
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        child: Image.network(
+          plant.imageUrl,
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
+    content: Text(
+      "What would you like to do with ${plant.nickName}?",
+      textAlign: TextAlign.center,
+    ),
+    actions: [
+      editButton,
+      removeButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

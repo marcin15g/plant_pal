@@ -22,9 +22,18 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String _nickname;
-    String _commonName;
-    final plantsProvider = Provider.of<Plants>(context);
+    final plantsProvider = Provider.of<Plants>(context);    
+    final plantData = ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+    final CollectionPlant plant = plantData != null ? plantData['plant'] : null;
+    final bool editMode = plant != null ? true : false;
+    String _nickname = "";
+    String _commonName = "";
+
+    if(plant != null) {
+      _nickname = plant.nickName;
+      _commonName = plant.commonName;
+      _imageUrl = plant.imageUrl;
+    }
 
     _loadCameraImage() async {
       final _storage = FirebaseStorage.instance;
@@ -91,7 +100,7 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
           nickName: _nickname,
           commonName: _commonName,
           imageUrl: _imageUrl);
-      saveCollectionPlant(newPlant);
+      editMode ? updateCollectionPlant(plant.id, newPlant) : saveCollectionPlant(newPlant);
       _formKey.currentState.reset();
       _imageUrl = _nickname = _commonName = "";
       plantsProvider.fetchCollectionPlants();
@@ -100,7 +109,7 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add new plant'),
+          title: Text(editMode ? 'Edit plant' : 'Add new plant'),
         ),
         body: Container(
           child: Form(
@@ -226,9 +235,7 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
                           Expanded(
                             child: ElevatedButton(
                                 onPressed: _uploadPLant,
-                                child: Text(
-                                  'ADD',
-                                )),
+                                child: Text(editMode ? 'UPDATE' : 'ADD')),
                           ),
                         ],
                       ),

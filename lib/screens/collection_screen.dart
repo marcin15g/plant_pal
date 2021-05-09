@@ -9,13 +9,11 @@ class CollectionScreen extends StatefulWidget {
 }
 
 class _CollectionScreenState extends State<CollectionScreen> {
-
   @override
   void initState() {
     Provider.of<Plants>(context, listen: false).fetchCollectionPlants();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +25,15 @@ class _CollectionScreenState extends State<CollectionScreen> {
       itemCount: collectionPlants.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
         value: collectionPlants[i],
-        child: CollectionPlantTile(plant: collectionPlants[i],)
+        child: CollectionPlantTile(
+          plant: collectionPlants[i],
+        ),
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1,
-        crossAxisSpacing: 15,
-        mainAxisSpacing: 15
-      ),
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15),
     );
   }
 }

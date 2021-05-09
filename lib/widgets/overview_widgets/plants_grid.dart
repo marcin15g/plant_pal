@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantpal/providers/plants.dart';
-import 'package:plantpal/widgets/plant_tile.dart';
+import 'package:plantpal/widgets/overview_widgets/plant_tile.dart';
 import 'package:provider/provider.dart';
 
 class PlantsGrid extends StatelessWidget {

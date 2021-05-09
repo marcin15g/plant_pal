@@ -5,7 +5,7 @@ import 'package:plantpal/screens/collection_screen.dart';
 import 'package:plantpal/screens/new_plant_screen.dart';
 import 'package:plantpal/screens/plants_overview_screen.dart';
 import 'package:plantpal/widgets/main_drawer.dart';
-import 'package:plantpal/widgets/search_bar.dart';
+import 'package:plantpal/widgets/overview_widgets/search_bar.dart';
 
 class TabScreen extends StatefulWidget {
   static const routeName = '/tabs';

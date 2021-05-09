@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantpal/models/plant.dart';
 import 'package:plantpal/providers/plants.dart';
-import 'package:plantpal/widgets/plants_grid.dart';
+import 'package:plantpal/widgets/overview_widgets/plants_grid.dart';
 import 'package:provider/provider.dart';
 
 class PlantsOverviewScreen extends StatefulWidget {
