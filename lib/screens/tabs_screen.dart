@@ -1,20 +1,11 @@
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:plantpal/database.dart';
-import 'package:plantpal/models/collection_plant.dart';
-import 'package:plantpal/providers/plants.dart';
 import 'package:plantpal/screens/assistant_screen.dart';
 import 'package:plantpal/screens/collection_screen.dart';
 import 'package:plantpal/screens/new_plant_screen.dart';
 import 'package:plantpal/screens/plants_overview_screen.dart';
 import 'package:plantpal/widgets/main_drawer.dart';
 import 'package:plantpal/widgets/search_bar.dart';
-import 'package:provider/provider.dart';
 
 class TabScreen extends StatefulWidget {
   static const routeName = '/tabs';
@@ -30,14 +21,9 @@ class _TabScreenState extends State<TabScreen> {
     {'page': AssistantScreen(), 'title': 'Assistant'}
   ];
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   int _selectedPageIndex = 1;
-  String _nickname;
-  String _commonName;
 
   void _selectPage(int index) {
-    print(index);
     setState(() {
       _selectedPageIndex = index;
     });
@@ -57,9 +43,6 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     final Map<String, User> userInfo =
         ModalRoute.of(context).settings.arguments as Map<String, User>;
-        String _imageUrl;
-        File _image;
-        final plantsProvider = Provider.of<Plants>(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -101,15 +84,6 @@ class _TabScreenState extends State<TabScreen> {
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(NewPlantScreen.routeName);
-                // showDialog(
-                //   context: context,
-                //   builder: (context) {
-                //     return StatefulBuilder(builder: (context, setState) {
-                //       //form here
-                //       // return _buildPopupDialog(context, setState, _imageUrl);
-                //     });
-                //   },
-                // );
               },
               child: Icon(Icons.add),
               backgroundColor: Colors.green,

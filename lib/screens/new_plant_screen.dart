@@ -34,7 +34,6 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
       await Permission.camera.request();
       var permissionStatus = await Permission.camera.status;
       if (permissionStatus.isGranted) {
-        print("GRANTED");
         image = await _picker.getImage(source: ImageSource.camera);
         var file = File(image.path);
         if (image != null) {
@@ -44,7 +43,6 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
               .putFile(file);
 
           var downloadUrl = await snapshot.ref.getDownloadURL();
-          print(downloadUrl);
           setState(() {
             _imageUrl = downloadUrl;
           });
@@ -64,7 +62,6 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
       await Permission.photos.request();
       var permissionStatus = await Permission.photos.status;
       if (permissionStatus.isGranted) {
-        print("GRANTED");
         image = await _picker.getImage(source: ImageSource.gallery);
         var file = File(image.path);
         if (image != null) {
@@ -242,140 +239,3 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
         ));
   }
 }
-
-// AlertDialog(
-//         shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.all(Radius.circular(30.0))),
-//         titlePadding: EdgeInsets.all(0.0),
-//         title: Container(
-//           height: 200.0,
-//           child: ClipRRect(
-//             borderRadius: BorderRadius.all(Radius.circular(30.0)),
-//             child: _imageUrl != null
-//                 ? FadeInImage.assetNetwork(
-//                     placeholder: 'assets/placeholder.jpg',
-//                     image: _imageUrl,
-//                     fit: BoxFit.cover,
-//                   )
-//                 : Image.asset(
-//                     'assets/placeholder.jpg',
-//                     fit: BoxFit.cover,
-//                   ),
-//           ),
-//         ),
-//         content: Column(
-//           mainAxisSize: MainAxisSize.min,
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             TextFormField(
-//               decoration: InputDecoration(labelText: "Nickname"),
-//               validator: (String value) {
-//                 return value.isEmpty ? 'Please enter Nickname' : null;
-//               },
-//               controller: new TextEditingController(text: _nickname),
-//               onSaved: (String value) {
-//                 _nickname = value;
-//               },
-//             ),
-//             TextFormField(
-//               decoration: InputDecoration(labelText: "Common Name"),
-//               controller: new TextEditingController(text: _commonName),
-//               validator: (String value) {
-//                 return value.isEmpty ? 'Please enter Common Name' : null;
-//               },
-//               onSaved: (String value) {
-//                 _commonName = value;
-//               },
-//             )
-//           ],
-//         ),
-//         actions: <Widget>[
-//           //UPLOAD IMAGE FROM CAMERA
-//           new TextButton(
-//             child: Icon(Icons.camera),
-//             onPressed: () async {
-//               final _storage = FirebaseStorage.instance;
-//               final _picker = ImagePicker();
-//               PickedFile image;
-
-//               await Permission.camera.request();
-//               var permissionStatus = await Permission.camera.status;
-//               if (permissionStatus.isGranted) {
-//                 print("GRANTED");
-//                 image = await _picker.getImage(source: ImageSource.camera);
-//                 var file = File(image.path);
-//                 if (image != null) {
-//                   var snapshot = await _storage
-//                       .ref()
-//                       .child(DateTime.now().toString())
-//                       .putFile(file);
-
-//                   var downloadUrl = await snapshot.ref.getDownloadURL();
-//                   print(downloadUrl);
-//                   setState(() {
-//                     _imageUrl = downloadUrl;
-//                     if (_formKey.currentState.validate())
-//                       _formKey.currentState.save();
-//                   });
-//                 } else {
-//                   print('No path');
-//                 }
-//               } else {
-//                 print('Grant Permissions and try again!');
-//               }
-//             },
-//           ),
-//           //UPLOAD IMAGE FROM GALLERY
-//           new TextButton(
-//             child: Icon(Icons.image),
-//             onPressed: () async {
-//               final _storage = FirebaseStorage.instance;
-//               final _picker = ImagePicker();
-//               PickedFile image;
-
-//               await Permission.photos.request();
-//               var permissionStatus = await Permission.photos.status;
-//               if (permissionStatus.isGranted) {
-//                 print("GRANTED");
-//                 image = await _picker.getImage(source: ImageSource.gallery);
-//                 var file = File(image.path);
-//                 if (image != null) {
-//                   var snapshot = await _storage
-//                       .ref()
-//                       .child(DateTime.now().toString())
-//                       .putFile(file);
-
-//                   var downloadUrl = await snapshot.ref.getDownloadURL();
-//                   print(downloadUrl);
-//                   setState(() {
-//                     _imageUrl = downloadUrl;
-//                     if (_formKey.currentState.validate())
-//                       _formKey.currentState.save();
-//                   });
-//                 } else {
-//                   print('No path');
-//                 }
-//               } else {
-//                 print('Grant Permissions and try again!');
-//               }
-//             },
-//           ),
-//           new TextButton(
-//             onPressed: () {
-//               //UPLOAD NEW PLANT TO COLLECTION
-//               if (!_formKey.currentState.validate()) return;
-//               _formKey.currentState.save();
-//               var newPlant = new CollectionPlant(
-//                   nickName: _nickname,
-//                   commonName: _commonName,
-//                   imageUrl: _imageUrl);
-//               saveCollectionPlant(newPlant);
-//               _formKey.currentState.reset();
-//               _imageUrl = _nickname = _commonName = "";
-//               plantsProvider.fetchCollectionPlants();
-//               Navigator.of(context).pop();
-//             },
-//             child: const Text('Add'),
-//           ),
-//         ],
-//       ),

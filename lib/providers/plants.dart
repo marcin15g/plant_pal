@@ -39,8 +39,6 @@ class Plants with ChangeNotifier {
     });
 
     _collectionPlants = collPlantsArray;
-    print("TEST");
-    print(_collectionPlants);
     notifyListeners();
   }
 
@@ -64,11 +62,9 @@ class Plants with ChangeNotifier {
     // 
     List<Plant> fetchedPlants = [];
     var jsonDataArray = convert.jsonDecode(await rootBundle.loadString('assets/json/demo/demo.json'));
-    print(jsonDataArray);
     for(var i=0; i<jsonDataArray.length; i++) {
       fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
     }
-      print(fetchedPlants);
       _plants = fetchedPlants;
       notifyListeners();   
   }
@@ -85,7 +81,6 @@ class Plants with ChangeNotifier {
         fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
       }
       _plants = fetchedPlants;
-      _plants.forEach((element) {print(element.imageUrl);});
       notifyListeners();
     }
     else {
