@@ -18,6 +18,7 @@ class Plants with ChangeNotifier {
 
   List<Plant> _plants = [];
   List<CollectionPlant> _collectionPlants = [];
+  List<CollectionPlant> _assistantPlants = [];
 
   List<Plant> get plants {
     return [..._plants];
@@ -27,6 +28,25 @@ class Plants with ChangeNotifier {
     return [..._collectionPlants];
   }
 
+  List<CollectionPlant> get assistantPlants {
+    return [..._assistantPlants];
+  }
+
+  Future<void> fetchAssistantPlants() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final String uid = auth.currentUser.uid;
+    final List<CollectionPlant> assistantPlants = [];   
+
+    DataSnapshot snapshot = await fetchCollectionPlantsFromDB(uid);
+    snapshot.value.forEach((key, value) {
+      if(value['assistantEnabled'] == true) {
+        assistantPlants.add(CollectionPlant.fromSnapshot(key, value));
+      }
+    });
+    _assistantPlants = assistantPlants;
+    notifyListeners();
+  }
+
   Future<void> fetchCollectionPlants() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final String uid = auth.currentUser.uid;
@@ -34,6 +54,7 @@ class Plants with ChangeNotifier {
 
 
     DataSnapshot snapshot = await fetchCollectionPlantsFromDB(uid);
+    print(snapshot.value);
     snapshot.value.forEach((key, value) => {
       collPlantsArray.add(CollectionPlant.fromSnapshot(key, value))
     });

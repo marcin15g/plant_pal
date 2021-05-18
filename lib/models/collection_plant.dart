@@ -1,10 +1,6 @@
-import 'dart:convert';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 
 class CollectionPlant with ChangeNotifier {
-  DatabaseReference _dbRef;
   final String id;
   final String nickName;
   final String commonName;
@@ -27,12 +23,12 @@ class CollectionPlant with ChangeNotifier {
       'imageUrl': this.imageUrl,
       'assistantEnabled': this.assistantEnabled,
       'daysAmount': this.daysAmount,
-      'lastWatering': this.lastWatering
+      'lastWatering': this.lastWatering.toString()
     };
   }
 
   factory CollectionPlant.fromSnapshot(key, value) {
-    print(key);
+    
     final plant = new CollectionPlant(
       id: key,
       nickName: value['nickName'],
@@ -41,6 +37,8 @@ class CollectionPlant with ChangeNotifier {
     );
     plant.assistantEnabled = value['assistantEnabled'];
     plant.daysAmount = value['daysAmount'];
+    print(value['lastWatering'].runtimeType);
+    plant.lastWatering = value['lastWatering'] != 'null' ? DateTime.parse(value['lastWatering']) : null; 
 
     return plant;
   }

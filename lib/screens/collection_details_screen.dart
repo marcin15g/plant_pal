@@ -20,8 +20,6 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
         ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
     CollectionPlant plant = data['plant'];
 
-
-    print(plant.toJson().toString());
     final spinkit = SpinKitFadingCube(
       itemBuilder: (BuildContext context, int index) {
         return DecoratedBox(decoration: BoxDecoration(color: Colors.green));
@@ -30,9 +28,7 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        print(plant.toJson().toString());
         updateCollectionPlant(plant);
-        print('POP');
         return true;
       },
       child: Scaffold(
