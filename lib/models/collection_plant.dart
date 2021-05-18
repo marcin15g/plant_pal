@@ -9,24 +9,25 @@ class CollectionPlant with ChangeNotifier {
   final String nickName;
   final String commonName;
   final String imageUrl;
+  bool assistantEnabled = false;
+  int daysAmount = 3;
+  DateTime lastWatering;
 
   CollectionPlant({
     this.id,
     this.nickName,
     this.commonName,
-    this.imageUrl
+    this.imageUrl,
   });
-
-  // setId(String id) {
-  //   this.id = id;
-  // }
-
 
   Map<String, dynamic> toJson() {
     return {  
       'nickName': this.nickName,
       'commonName': this.commonName,
-      'imageUrl': this.imageUrl
+      'imageUrl': this.imageUrl,
+      'assistantEnabled': this.assistantEnabled,
+      'daysAmount': this.daysAmount,
+      'lastWatering': this.lastWatering
     };
   }
 
@@ -38,7 +39,9 @@ class CollectionPlant with ChangeNotifier {
       commonName: value['commonName'],
       imageUrl: value['imageUrl']
     );
-    // plant.setId(key);
+    plant.assistantEnabled = value['assistantEnabled'];
+    plant.daysAmount = value['daysAmount'];
+
     return plant;
   }
 

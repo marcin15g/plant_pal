@@ -4,6 +4,7 @@ import 'package:plantpal/widgets/collection_widtegs/c_plant_tile.dart';
 import 'package:provider/provider.dart';
 
 class CollectionScreen extends StatefulWidget {
+  
   @override
   _CollectionScreenState createState() => _CollectionScreenState();
 }

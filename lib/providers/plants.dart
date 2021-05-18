@@ -13,7 +13,7 @@ import 'package:plantpal/models/plant_details.dart';
 
 class Plants with ChangeNotifier {
   
-  static String token = 'tGDID0HQZK1PpArN2eGAKyoV5j7uiNcT2UJedHoR5H0';
+  static String token = 'H7bfxssQjiaQ6aIUMlEL';
 
 
   List<Plant> _plants = [];
@@ -43,34 +43,34 @@ class Plants with ChangeNotifier {
   }
 
   Future<void> fetchDemoPlants() async {
-    // final url = Uri.https('trefle.io', 'api/v1/plants', {'token': token});
-    // final http.Response response = await http.get(url);
-    // List<Plant> fetchedPlants = [];
-
-    // if(response.statusCode == 200) {
-    //   final jsonDataArray = jsonDecode(response.body)['data'];
-
-    //   for(var i=0; i<jsonDataArray.length; i++) {
-    //     fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
-    //   }
-    //   _plants = fetchedPlants;
-    //   notifyListeners();
-    // }
-    // else {
-    //   throw Exception('Failed to load demo plants');
-    // }
-    // 
+    final url = Uri.https('api.floracodex.com', 'api/v1/plants/search', {'q': 'lily','token': token});
+    final http.Response response = await http.get(url);
     List<Plant> fetchedPlants = [];
-    var jsonDataArray = convert.jsonDecode(await rootBundle.loadString('assets/json/demo/demo.json'));
-    for(var i=0; i<jsonDataArray.length; i++) {
-      fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
+
+    if(response.statusCode == 200) {
+      final jsonDataArray = convert.jsonDecode(response.body)['data'];
+
+      for(var i=0; i<jsonDataArray.length; i++) {
+        fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
+      }
+      _plants = fetchedPlants;
+      notifyListeners();
     }
+    else {
+      throw Exception('Failed to load demo plants');
+    }
+    
+    // List<Plant> fetchedPlants = [];
+    // var jsonDataArray = convert.jsonDecode(await rootBundle.loadString('assets/json/demo/demo.json'));
+    // for(var i=0; i<jsonDataArray.length; i++) {
+    //   fetchedPlants.add(Plant.fromJson(jsonDataArray[i]));
+    // }
       _plants = fetchedPlants;
       notifyListeners();   
   }
 
   Future<void> searchForPlants(String searchInput) async {
-    final url = Uri.https('trefle.io', 'api/v1/plants/search', {'q': searchInput,'token': token});
+    final url = Uri.https('api.floracodex.com', 'api/v1/plants/search', {'q': searchInput,'token': token});
     final http.Response response = await http.get(url);
     List<Plant> fetchedPlants = [];
 
@@ -88,24 +88,22 @@ class Plants with ChangeNotifier {
     }   
   }
 
-  Future<PlantDetails> fetchPlantDetails(int plantId) async {
-  //   final url = Uri.https('trefle.io', 'api/v1/plants/${plantId.toString()}', {'token': token});
-  //   final http.Response response = await http.get(url);
+  Future<PlantDetails> fetchPlantDetails(String plantId) async {
+    final url = Uri.https('api.floracodex.com', 'api/v1/plants/' + plantId, {'token': token});
+    final http.Response response = await http.get(url);
 
-  //   if(response.statusCode == 200) {
-  //     final jsonData = convert.jsonDecode(response.body)['data'];
-  //     final plantDetails = PlantDetails.fromJson(jsonData);
-
-  //     print(jsonData);
-  //     return plantDetails;
-  //     // return jsonData;
-  //   }
-  //   else {
-  //     throw Exception('Failed to load plant details');
-  //   }    
-  // 
-      var jsonData = convert.jsonDecode(await rootBundle.loadString('assets/json/demo/details.json'));
+    if(response.statusCode == 200) {
+      final jsonData = convert.jsonDecode(response.body)['data'];
       final plantDetails = PlantDetails.fromJson(jsonData);
       return plantDetails;
+      // return jsonData;
+    }
+    else {
+      throw Exception('Failed to load plant details');
+    }    
+  
+      // var jsonData = convert.jsonDecode(await rootBundle.loadString('assets/json/demo/details.json'));
+      // final plantDetails = PlantDetails.fromJson(jsonData);
+      // return plantDetails;
   }
 }

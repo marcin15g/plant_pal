@@ -10,8 +10,8 @@ class PlantDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final plantData =
-        ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+    final plantData = ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+    print('ASDASD' + plantData['id']);
     final Future<PlantDetails> plant =
         Provider.of<Plants>(context).fetchPlantDetails(plantData['id']);
 
@@ -46,7 +46,3 @@ class PlantDetailScreen extends StatelessWidget {
     );
   }
 }
-
-// Function plantDetails(PlantDetails plant) {
-//   return
-// }

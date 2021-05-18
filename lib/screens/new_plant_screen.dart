@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:plantpal/database.dart';
@@ -28,6 +30,14 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
     final bool editMode = plant != null ? true : false;
     String _nickname = "";
     String _commonName = "";
+
+    final spinkit = SpinKitFadingCube(
+      itemBuilder: (BuildContext context, int index) {
+        return DecoratedBox(
+          decoration: BoxDecoration(color: Colors.green)
+        );
+      },
+    );
 
     if(plant != null) {
       _nickname = plant.nickName;
@@ -100,7 +110,7 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
           nickName: _nickname,
           commonName: _commonName,
           imageUrl: _imageUrl);
-      editMode ? updateCollectionPlant(plant.id, newPlant) : saveCollectionPlant(newPlant);
+      editMode ? updateCollectionPlant(newPlant) : saveCollectionPlant(newPlant);
       _formKey.currentState.reset();
       _imageUrl = _nickname = _commonName = "";
       plantsProvider.fetchCollectionPlants();
@@ -124,10 +134,10 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
                         width: double.infinity,
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                          child: _imageUrl != null
-                              ? FadeInImage.assetNetwork(
-                                  placeholder: 'assets/placeholder.jpg',
-                                  image: _imageUrl,
+                          child: _imageUrl != null && _imageUrl != ''
+                              ? CachedNetworkImage(
+                                  placeholder: (context, url) => spinkit,
+                                  imageUrl: _imageUrl,
                                   fit: BoxFit.cover,
                                 )
                               : Image.asset(

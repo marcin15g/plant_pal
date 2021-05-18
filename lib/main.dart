@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantpal/providers/plants.dart';
 import 'package:plantpal/providers/user.dart';
+import 'package:plantpal/screens/collection_details_screen.dart';
 import 'package:plantpal/screens/login.dart';
 import 'package:plantpal/screens/new_plant_screen.dart';
 import 'package:plantpal/screens/plant_details_screen.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           TabScreen.routeName: (ctx) => TabScreen(),
           PlantDetailScreen.routeName: (ctx) => PlantDetailScreen(),
           LoginScreen.routeName: (ctx) => LoginScreen(),
-          NewPlantScreen.routeName: (ctx) => NewPlantScreen()
+          NewPlantScreen.routeName: (ctx) => NewPlantScreen(),
+          CollectionDetailsScreen.routeName: (ctx) => CollectionDetailsScreen()
         },
       ),
     );

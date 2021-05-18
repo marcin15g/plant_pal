@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Plant with ChangeNotifier {
-  final int id;
+  final String id;
   final String commonName;
   final String scientificName;
   final String imageUrl;

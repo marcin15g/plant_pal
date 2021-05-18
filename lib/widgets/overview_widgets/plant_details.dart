@@ -8,7 +8,6 @@ class PlantDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(plantInfo);
     return Stack(
       children: [
         Container(
@@ -19,7 +18,7 @@ class PlantDetailsWidget extends StatelessWidget {
         SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.65,
+              top: MediaQuery.of(context).size.height * 0.7,
             ),
             width: double.infinity,
             transform: Matrix4.translationValues(0.0, -50.0, 0.0),

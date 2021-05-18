@@ -38,6 +38,9 @@ dependencies:
   firebase_storage: ^8.0.5
   permission_handler: ^7.1.0
   dio: ^4.0.0
+  cached_network_image: ^3.0.0
+  numberpicker: ^2.1.1
+
 
 dev_dependencies:
   flutter_test:

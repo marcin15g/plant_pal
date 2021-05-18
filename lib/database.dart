@@ -19,10 +19,16 @@ Future<DataSnapshot> fetchCollectionPlantsFromDB(String uid) async {
   return dataSnapshot;
 }
 
+Future<DataSnapshot> fetchCollectionPlant(String id) async {
+  DataSnapshot dataSnapshot = await databaseReference.child('plants_collections').child(uid).child(id).once();
+  return dataSnapshot;
+}
+
 void removeCollectionPlant(String id) {
   databaseReference.child('plants_collections').child(uid).child(id).remove();
 }
 
-void updateCollectionPlant(String id, CollectionPlant plant) {
-  databaseReference.child('plants_collections').child(uid).child(id).update(plant.toJson());
+void updateCollectionPlant(CollectionPlant plant) {
+  print('database ' + plant.id);
+  databaseReference.child('plants_collections').child(uid).child(plant.id).update(plant.toJson());
 }
