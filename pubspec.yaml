@@ -41,6 +41,7 @@ dependencies:
   cached_network_image: ^3.0.0
   numberpicker: ^2.1.1
   material_design_icons_flutter: ^4.0.5955
+  mailto: ^2.0.0
 
 
 dev_dependencies:
@@ -93,10 +94,10 @@ flutter:
 
 #1. Szczegóły o roślinie - Already done
 
-#5. Ustawienie fontów
-#4. 5 days passed
-#6. Edycja w widoku szczegółów rośliny
-#2. About Me
+#5. Ustawienie fontów - done
+#4. 5 days passed - done
+#6. Edycja w widoku szczegółów rośliny - done
+#2. About Me 
 
 #3. Powiadomienia w dniu podlewania
 

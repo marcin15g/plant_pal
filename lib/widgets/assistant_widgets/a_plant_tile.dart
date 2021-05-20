@@ -12,6 +12,7 @@ class AssistantPlantTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     int daysDifference() {
       final DateTime lastWatering = plant.lastWatering;
       if (lastWatering == null) return 0;
@@ -22,7 +23,6 @@ class AssistantPlantTile extends StatelessWidget {
       final diff = plant.daysAmount - date.difference(lastWatering).inDays;
       return diff;
     }
-
     final int diff = daysDifference();
 
     String daysUntilWatering(diff) {
@@ -76,7 +76,10 @@ class AssistantPlantTile extends StatelessWidget {
                       fontSize: 20.0
                     ),),
                   ),
-                  Text('Watering: ' + daysUntilWatering(diff))
+                  Text('Watering: ' + daysUntilWatering(diff)),
+                  plant.daysAmount > 1 ? 
+                  Text('Frequency: Every ${plant.daysAmount} days') :
+                  Text('Frequency: Everyday'),
                 ],
               ),
               Container(

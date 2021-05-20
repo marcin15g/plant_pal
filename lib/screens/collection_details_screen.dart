@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:plantpal/database.dart';
 import 'package:plantpal/models/collection_plant.dart';
+import 'package:plantpal/screens/new_plant_screen.dart';
 
 class CollectionDetailsScreen extends StatefulWidget {
   static const routeName = '/collection-details-screen';
@@ -26,6 +27,13 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
       },
     );
 
+    void _openEditScreen() {
+      Navigator.of(context).pop();
+      Navigator.of(context).pushNamed(NewPlantScreen.routeName, arguments: {
+        'plant': plant,
+      });
+    }
+
     return WillPopScope(
       onWillPop: () async {
         updateCollectionPlant(plant);
@@ -34,18 +42,30 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(plant.nickName),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () => _openEditScreen(),
+                child: Icon(
+                  Icons.edit,
+                  size: 24.0,
+                ),
+              ),
+            ),
+          ],
         ),
         body: Container(
           child: Column(
             children: [
               Container(
-                child: CachedNetworkImage(
-                    width: double.infinity,
-                    height: double.infinity,
-                    imageUrl: plant.imageUrl, fit: BoxFit.cover),
-                height: MediaQuery.of(context).size.height * 0.6,
-                width: double.infinity
-              ),
+                  child: CachedNetworkImage(
+                      width: double.infinity,
+                      height: double.infinity,
+                      imageUrl: plant.imageUrl,
+                      fit: BoxFit.cover),
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: double.infinity),
               Container(
                 width: double.infinity,
                 transform: Matrix4.translationValues(0.0, -50.0, 0.0),
