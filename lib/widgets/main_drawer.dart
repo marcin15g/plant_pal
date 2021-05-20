@@ -27,37 +27,43 @@ class MainDrawer extends StatelessWidget {
                           decoration: BoxDecoration(color: Colors.green[900]),
                           height: 150,
                           width: double.infinity,
-                          child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/placeholder.jpg',
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                ),
-                                Text("Plant Pal",
-                                style: TextStyle(
-                                  fontSize: 20,
+                          child: Stack(alignment: Alignment.center, children: [
+                            Image.asset(
+                              'assets/placeholder.jpg',
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            ),
+                            Text(
+                              "Plant Pal",
+                              style: TextStyle(
+                                  fontFamily: 'Pacifico',
+                                  fontSize: 40,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold
-                                ),)
-                              ]
-                          ),
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ]),
                         ),
                         ListTile(
                           leading: Icon(Icons.api),
                           title: Text('More about Trefle.io'),
-                          onTap: () {_launchURL('https://trefle.io');},
+                          onTap: () {
+                            _launchURL('https://trefle.io');
+                          },
                         ),
                         ListTile(
                           leading: Icon(Icons.code),
                           title: Text('Checkout this project on GitHub'),
-                          onTap: () {_launchURL("https://github.com/marcin15g/plant_pal");},
+                          onTap: () {
+                            _launchURL(
+                                "https://github.com/marcin15g/plant_pal");
+                          },
                         ),
                         ListTile(
                           leading: Icon(Icons.list_alt),
                           title: Text('Flutter Documentation'),
-                          onTap: () {_launchURL('https://flutter.dev/docs');},
+                          onTap: () {
+                            _launchURL('https://flutter.dev/docs');
+                          },
                         ),
                       ],
                     ),
@@ -66,7 +72,11 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             Container(
-              decoration: BoxDecoration(color: Colors.green[900]),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                color: Colors.green[900],
+              ),
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -83,9 +93,11 @@ class MainDrawer extends StatelessWidget {
                     ),
                   ),
                   trailing: GestureDetector(
-                    child: Icon(
-                      Icons.logout,
-                      color: Colors.white,
+                    child: Container(
+                      child: Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ),
                     ),
                     onTap: () {
                       signOutGoogle();
@@ -102,8 +114,8 @@ class MainDrawer extends StatelessWidget {
   }
 }
 
-_launchURL(String url) async => await canLaunch(url) ? await launch(url) : throw "Can't launch";
-
+_launchURL(String url) async =>
+    await canLaunch(url) ? await launch(url) : throw "Can't launch";
 
 // DrawerHeader(
 //   padding: EdgeInsets.zero,

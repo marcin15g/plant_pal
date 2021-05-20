@@ -77,7 +77,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text(
                 "Plant Pal",
                 style: TextStyle(
-                  fontSize: 55.0,
+                  fontFamily: 'Pacifico',
+                  fontSize: 70.0,
                   color: Colors.white,
                   decoration: TextDecoration.none
                 ),

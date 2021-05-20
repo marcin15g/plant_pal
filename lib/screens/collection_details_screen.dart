@@ -40,9 +40,11 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
             children: [
               Container(
                 child: CachedNetworkImage(
+                    width: double.infinity,
+                    height: double.infinity,
                     imageUrl: plant.imageUrl, fit: BoxFit.cover),
-                height: MediaQuery.of(context).size.height * 0.62,
-                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.6,
+                width: double.infinity
               ),
               Container(
                 width: double.infinity,
@@ -82,7 +84,7 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
                         ),
                       ),
                       Container(
-                        height: 120,
+                        height: 150,
                         child: Stack(children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -102,7 +104,7 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
                                         child: Text('Number of days'),
                                       ),
                                     ),
-                                    Container(
+                                    Expanded(
                                       child: Card(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -113,7 +115,7 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
                                           value: plant.daysAmount,
                                           minValue: 1,
                                           maxValue: 30,
-                                          itemHeight: 23,
+                                          itemHeight: 30,
                                           onChanged: (value) => {
                                             setState(() =>
                                                 {plant.daysAmount = value})
@@ -132,7 +134,7 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
                               Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15.0)),
-                                margin: EdgeInsets.symmetric(horizontal: 25.0),
+                                margin: EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Container(
                                   padding: EdgeInsets.all(15.0),
                                   child: Row(
