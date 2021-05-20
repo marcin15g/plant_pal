@@ -52,12 +52,13 @@ class Plants with ChangeNotifier {
     final String uid = auth.currentUser.uid;
     final List<CollectionPlant> collPlantsArray = [];
 
-
     DataSnapshot snapshot = await fetchCollectionPlantsFromDB(uid);
-    print(snapshot.value);
-    snapshot.value.forEach((key, value) => {
-      collPlantsArray.add(CollectionPlant.fromSnapshot(key, value))
-    });
+
+    if(snapshot != null && snapshot.value != null) {
+      snapshot.value.forEach((key, value) => {
+        collPlantsArray.add(CollectionPlant.fromSnapshot(key, value))
+      });
+    }
 
     _collectionPlants = collPlantsArray;
     notifyListeners();

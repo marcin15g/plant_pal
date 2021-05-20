@@ -25,7 +25,10 @@ class _AssistantScreenState extends State<AssistantScreen> {
 
     callback(int index) {
       setState(() {
-        assistantPlants[index].lastWatering = DateTime.now();
+        DateTime now = new DateTime.now();
+        DateTime date = new DateTime(now.year, now.month, now.day);
+
+        assistantPlants[index].lastWatering = date;
         updateCollectionPlant(assistantPlants[index]);
       });
     }

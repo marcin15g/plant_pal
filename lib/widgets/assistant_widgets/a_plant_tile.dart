@@ -16,8 +16,10 @@ class AssistantPlantTile extends StatelessWidget {
       final DateTime lastWatering = plant.lastWatering;
       if (lastWatering == null) return 0;
 
-      final DateTime now = DateTime.now();
-      final diff = plant.daysAmount - now.difference(lastWatering).inDays;
+      DateTime now = new DateTime.now();
+      DateTime date = new DateTime(now.year, now.month, now.day);
+
+      final diff = plant.daysAmount - date.difference(lastWatering).inDays;
       return diff;
     }
 

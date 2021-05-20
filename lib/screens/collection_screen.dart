@@ -4,7 +4,6 @@ import 'package:plantpal/widgets/collection_widtegs/c_plant_tile.dart';
 import 'package:provider/provider.dart';
 
 class CollectionScreen extends StatefulWidget {
-  
   @override
   _CollectionScreenState createState() => _CollectionScreenState();
 }
@@ -21,7 +20,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
     final plantsProvider = Provider.of<Plants>(context);
     final collectionPlants = plantsProvider.collectionPlants;
 
-    return GridView.builder(
+    Widget grid = GridView.builder(
       padding: EdgeInsets.all(15.0),
       itemCount: collectionPlants.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
@@ -36,5 +35,21 @@ class _CollectionScreenState extends State<CollectionScreen> {
           crossAxisSpacing: 15,
           mainAxisSpacing: 15),
     );
+
+    Widget noPlants = Container(
+      width: double.infinity,
+      height: double.infinity,
+      alignment: Alignment.center,
+      child: Text(
+        "There are no plants in your collection!",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.green,
+          fontSize: 30
+        ),
+      ),
+    );
+
+    return collectionPlants.length > 0 ? grid : noPlants;
   }
 }

@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
         height: 60,
         width: 220,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
@@ -49,12 +50,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 fit: BoxFit.fitHeight,
               ),
             ),
-            SizedBox(
-              width: 20,
-            ),
-            Text(
-              'Sign in with Google',
-              style: TextStyle(fontSize: 18),
+            // SizedBox(
+            //   width: 30,
+            // ),
+            Expanded(
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),
@@ -77,11 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text(
                 "Plant Pal",
                 style: TextStyle(
-                  fontFamily: 'Pacifico',
-                  fontSize: 70.0,
-                  color: Colors.white,
-                  decoration: TextDecoration.none
-                ),
+                    fontFamily: 'Pacifico',
+                    fontSize: 70.0,
+                    color: Colors.white,
+                    decoration: TextDecoration.none),
               ),
             ),
             googleLoginButton()
