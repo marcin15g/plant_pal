@@ -6,7 +6,7 @@ class PlantDetails with ChangeNotifier {
   final String scientificName;
   final String imageUrl;
   final int year;
-  final Object images;
+  final Map<String, dynamic> images;
   final String bibliography;
   final String familyCommonName;
   final String observations;

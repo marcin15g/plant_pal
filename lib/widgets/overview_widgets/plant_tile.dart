@@ -21,7 +21,7 @@ class PlantTile extends StatelessWidget {
               arguments: {'id': plant.id, 'name': plant.commonName}
             );
           },
-          child: plant.imageUrl != null ? FadeInImage.assetNetwork(placeholder: 'assets/placeholder.jpg', image: plant.imageUrl, fit: BoxFit.cover,) : Image.asset('assets/placeholder.jpg', fit: BoxFit.cover,)
+          child: plant.imageUrl != null ? FadeInImage.assetNetwork(placeholder: 'assets/placeholder_2.jpg', image: plant.imageUrl, fit: BoxFit.cover,) : Image.asset('assets/placeholder_2.jpg', fit: BoxFit.cover,)
         ),
         footer: Container(
           height: 80,

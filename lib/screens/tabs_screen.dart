@@ -31,10 +31,14 @@ class _TabScreenState extends State<TabScreen> {
 
   void _searchForPlants(BuildContext ctx) {
     showModalBottomSheet(
+        isScrollControlled: true,
         context: ctx,
         builder: (_) {
-          return GestureDetector(
-            child: SearchBar(),
+          return Padding(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: GestureDetector(
+              child: SearchBar(),
+            ),
           );
         });
   }

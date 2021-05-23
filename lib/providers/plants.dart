@@ -65,7 +65,7 @@ class Plants with ChangeNotifier {
   }
 
   Future<void> fetchDemoPlants() async {
-    final url = Uri.https('api.floracodex.com', 'api/v1/plants/search', {'q': 'lily','token': token});
+    final url = Uri.https('api.floracodex.com', 'api/v1/plants/search', {'q': 'banana','token': token});
     final http.Response response = await http.get(url);
     List<Plant> fetchedPlants = [];
 

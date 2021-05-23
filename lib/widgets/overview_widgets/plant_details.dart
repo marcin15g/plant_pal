@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:plantpal/models/plant_details.dart';
+import 'package:plantpal/widgets/overview_widgets/gallery_segment.dart';
 
 class PlantDetailsWidget extends StatelessWidget {
   final PlantDetails plantInfo;
-
   PlantDetailsWidget(this.plantInfo);
 
   @override
   Widget build(BuildContext context) {
-    print(plantInfo.images);
+
+    // plantInfo.images.forEach((key, value) { 
+    //   print(key);
+    // });
+
+
     return Stack(
       children: [
         Container(
@@ -56,18 +61,38 @@ class PlantDetailsWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  plantInfo.year != null ? infoRow("Year", plantInfo.year.toString(),
-                      Icons.calendar_today, context)  : SizedBox(),
-                  plantInfo.bibliography != null ? infoRow("Bibliography", plantInfo.bibliography.toString(),
-                      Icons.book, context): SizedBox(),
-                  plantInfo.familyCommonName != null ? infoRow("Family", plantInfo.familyCommonName.toString(),
-                      Icons.supervised_user_circle_sharp, context): SizedBox(),
-                  plantInfo.observations != null ? infoRow("Observations", plantInfo.observations.toString(),
-                      Icons.search_rounded, context) : SizedBox(),
-                  // plantInfo.edible
-                  //     ? infoRow("Edible part", plantInfo.ediblePart.toString(),
-                  //         Icons.calendar_today, context)
-                  //     : SizedBox()
+                  plantInfo.year == null
+                      ? infoRow("Year", plantInfo.year.toString(),
+                          Icons.calendar_today, context)
+                      : SizedBox(),
+                  plantInfo.bibliography == null
+                      ? infoRow(
+                          "Bibliography",
+                          plantInfo.bibliography.toString(),
+                          Icons.book,
+                          context)
+                      : SizedBox(),
+                  plantInfo.familyCommonName != null
+                      ? infoRow("Family", plantInfo.familyCommonName.toString(),
+                          Icons.supervised_user_circle_sharp, context)
+                      : SizedBox(),
+                  plantInfo.observations != null
+                      ? infoRow(
+                          "Observations",
+                          plantInfo.observations.toString(),
+                          Icons.search_rounded,
+                          context)
+                      : SizedBox(),
+                  Column(
+                    children: plantInfo.images.entries.map((e) {
+                      final title = e.key;
+                      final images = [];
+                      e.value.forEach((elem) {
+                        images.add(elem['image_url']);
+                      });
+                      return GallerySegment(title, images);
+                    }).toList()
+                  ),
                 ],
               ),
             ),

@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // decoration: new BoxDecoration(color: Color.fromRGBO(255, 254, 229, 1)),
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/placeholder.jpg'),
+                image: AssetImage('assets/login_bg.jpg'),
                 fit: BoxFit.cover)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

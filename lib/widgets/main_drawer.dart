@@ -143,7 +143,7 @@ class MainDrawer extends StatelessWidget {
                           width: double.infinity,
                           child: Stack(alignment: Alignment.center, children: [
                             Image.asset(
-                              'assets/placeholder.jpg',
+                              'assets/login_bg.jpg',
                               fit: BoxFit.cover,
                               width: double.infinity,
                             ),
