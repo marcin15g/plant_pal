@@ -116,7 +116,6 @@ class Plants with ChangeNotifier {
 
     if(response.statusCode == 200) {
       final jsonData = convert.jsonDecode(response.body);
-      print(jsonData);
       final plantDetails = PlantDetails.fromJson(jsonData);
       return plantDetails;
       // return jsonData;

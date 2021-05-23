@@ -8,6 +8,7 @@ class PlantDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(plantInfo.images);
     return Stack(
       children: [
         Container(
@@ -55,22 +56,14 @@ class PlantDetailsWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  infoRow("Year", plantInfo.year.toString(),
-                      Icons.calendar_today, context),
-                  infoRow("Bibliography", plantInfo.bibliography.toString(),
-                      Icons.book, context),
-                  infoRow("Family", plantInfo.familyCommonName.toString(),
-                      Icons.supervised_user_circle_sharp, context),
-                  infoRow("Observations", plantInfo.observations.toString(),
-                      Icons.search_rounded, context),
-                  infoRow("Observations", plantInfo.observations.toString(),
-                      Icons.calendar_today, context),
-                  infoRow("Observations", plantInfo.observations.toString(),
-                      Icons.calendar_today, context),
-                  infoRow("Observations", plantInfo.observations.toString(),
-                      Icons.calendar_today, context),
-                  infoRow("Observations", plantInfo.observations.toString(),
-                      Icons.calendar_today, context),
+                  plantInfo.year != null ? infoRow("Year", plantInfo.year.toString(),
+                      Icons.calendar_today, context)  : SizedBox(),
+                  plantInfo.bibliography != null ? infoRow("Bibliography", plantInfo.bibliography.toString(),
+                      Icons.book, context): SizedBox(),
+                  plantInfo.familyCommonName != null ? infoRow("Family", plantInfo.familyCommonName.toString(),
+                      Icons.supervised_user_circle_sharp, context): SizedBox(),
+                  plantInfo.observations != null ? infoRow("Observations", plantInfo.observations.toString(),
+                      Icons.search_rounded, context) : SizedBox(),
                   // plantInfo.edible
                   //     ? infoRow("Edible part", plantInfo.ediblePart.toString(),
                   //         Icons.calendar_today, context)

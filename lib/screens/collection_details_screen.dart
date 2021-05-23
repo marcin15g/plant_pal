@@ -171,7 +171,6 @@ class _CollectionDetailsScreenState extends State<CollectionDetailsScreen> {
                                         onChanged: (value) {
                                           setState(() {
                                             plant.assistantEnabled = value;
-                                            print(plant.assistantEnabled);
                                           });
                                         },
                                       )

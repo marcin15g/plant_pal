@@ -29,6 +29,5 @@ void removeCollectionPlant(String id) {
 }
 
 void updateCollectionPlant(CollectionPlant plant) {
-  print('database ' + plant.toJson().toString());
   databaseReference.child('plants_collections').child(uid).child(plant.id).update(plant.toJson());
 }

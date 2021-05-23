@@ -90,7 +90,6 @@ class _NewPlantScreenState extends State<NewPlantScreen> {
               .putFile(file);
 
           var downloadUrl = await snapshot.ref.getDownloadURL();
-          print(downloadUrl);
           setState(() {
             _imageUrl = downloadUrl;
           });

@@ -37,7 +37,6 @@ class CollectionPlant with ChangeNotifier {
     );
     plant.assistantEnabled = value['assistantEnabled'];
     plant.daysAmount = value['daysAmount'];
-    print(value['lastWatering'].runtimeType);
     plant.lastWatering = value['lastWatering'] != 'null' ? DateTime.parse(value['lastWatering']) : null; 
 
     return plant;

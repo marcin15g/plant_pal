@@ -71,7 +71,6 @@ showAlertDialog(BuildContext context, Plants plantsProvider, CollectionPlant pla
   Widget editButton = ElevatedButton(
     child: Text("EDIT"),
     onPressed: () {
-      print("EDIT");
       Navigator.of(context).pop();
       Navigator.of(context).pushNamed(NewPlantScreen.routeName, arguments: {'plant': plant,});
     },
