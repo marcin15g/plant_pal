@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Sign in with Google',
                 style: TextStyle(
                   fontSize: 18,
+                  fontWeight: FontWeight.bold
                 ),
                 textAlign: TextAlign.center,
               ),

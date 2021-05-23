@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantpal/database.dart';
 import 'package:plantpal/models/collection_plant.dart';
+import 'package:plantpal/notification_service.dart';
 import 'package:plantpal/providers/plants.dart';
 import 'package:plantpal/widgets/assistant_widgets/a_plant_tile.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,20 @@ class _AssistantScreenState extends State<AssistantScreen> {
 
         assistantPlants[index].lastWatering = date;
         updateCollectionPlant(assistantPlants[index]);
+
+        NotificationService().scheduleNotification(assistantPlants[index].daysAmount);
+
+        int plantsToWaterToday = 0;
+        assistantPlants.forEach((CollectionPlant plant) {
+          final DateTime lastWatering = plant.lastWatering;
+          final DateTime now = new DateTime.now();
+          final DateTime date = new DateTime(now.year, now.month, now.day);
+
+          if(plant.daysAmount - date.difference(lastWatering).inDays == 0 || plant.lastWatering == null) {
+            plantsToWaterToday++;
+          }
+        });
+        if(plantsToWaterToday == 0) NotificationService().removeTodaysNotification();
       });
     }
 

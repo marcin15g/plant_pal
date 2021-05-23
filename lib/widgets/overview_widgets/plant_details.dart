@@ -71,10 +71,10 @@ class PlantDetailsWidget extends StatelessWidget {
                       Icons.calendar_today, context),
                   infoRow("Observations", plantInfo.observations.toString(),
                       Icons.calendar_today, context),
-                  plantInfo.edible
-                      ? infoRow("Edible part", plantInfo.ediblePart.toString(),
-                          Icons.calendar_today, context)
-                      : SizedBox()
+                  // plantInfo.edible
+                  //     ? infoRow("Edible part", plantInfo.ediblePart.toString(),
+                  //         Icons.calendar_today, context)
+                  //     : SizedBox()
                 ],
               ),
             ),

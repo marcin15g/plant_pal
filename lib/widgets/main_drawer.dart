@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mailto/mailto.dart';
+import 'package:plantpal/notification_service.dart';
 import 'package:plantpal/screens/login.dart';
 import 'package:plantpal/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 
 class MainDrawer extends StatelessWidget {
   final Map<String, User> userInfo;
@@ -87,24 +90,21 @@ class MainDrawer extends StatelessWidget {
       actions: [
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: EdgeInsets.only(bottom: 20.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(shape: StadiumBorder()),
-                  onPressed: () {
-                    launchMail();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Contact me', style: TextStyle(fontSize: 25.0)),
-                  ),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 20.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+                onPressed: () {
+                  launchMail();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Contact me', style: TextStyle(fontSize: 25.0)),
                 ),
               ),
-            ]
-          ),
+            ),
+          ]),
         )
       ],
     );
@@ -216,9 +216,14 @@ class MainDrawer extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: ListTile(
-                  leading: ClipRRect(
-                    child: Image.network(userInfo['user'].photoURL),
-                    borderRadius: BorderRadius.circular(50),
+                  leading: GestureDetector(
+                    onTap: () {
+                      NotificationService().showNotification();
+                    },
+                    child: ClipRRect(
+                      child: Image.network(userInfo['user'].photoURL),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
                   title: Align(
                     alignment: Alignment.centerLeft,

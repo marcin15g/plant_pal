@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantpal/notification_service.dart';
 import 'package:plantpal/providers/plants.dart';
 import 'package:plantpal/providers/user.dart';
 import 'package:plantpal/screens/collection_details_screen.dart';
@@ -12,6 +13,8 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await NotificationService().init();
+  
   runApp(MyApp());
 }
 
