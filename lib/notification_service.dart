@@ -16,7 +16,7 @@ class NotificationService {
 
   Future<void> init() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('mipmap/ic_launcher');
 
     final InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
@@ -43,8 +43,10 @@ class NotificationService {
         NotificationDetails(android: androidPlatformChannelSpecifics);
 
     await flutterLocalNotificationsPlugin.show(
-        0,'Hello! It\'s your Plant Pal! 🌱',
-    'Some of your plants need watering today!', platformChannelSpecifics,
+        0,
+        'Hello! It\'s your Plant Pal! 🌱',
+        'Some of your plants need watering today!',
+        platformChannelSpecifics,
         payload: 'item x');
   }
 
@@ -56,24 +58,29 @@ class NotificationService {
             priority: Priority.high,
             showWhen: true);
 
-    DateTime scheduledDay = tz.TZDateTime.now(tz.local).add(Duration(days: daysAdvance));
-    int id = int.parse(scheduledDay.day.toString() + scheduledDay.month.toString() + scheduledDay.year.toString());
-    
+    DateTime scheduledDay =
+        tz.TZDateTime.now(tz.local).add(Duration(days: daysAdvance));
+    int id = int.parse(scheduledDay.day.toString() +
+        scheduledDay.month.toString() +
+        scheduledDay.year.toString());
+
     await flutterLocalNotificationsPlugin.zonedSchedule(
-    id,
-    'Hello! It\'s your Plant Pal! 🌱',
-    'Some of your plants need watering today!',
-    scheduledDay, 
-    const NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-    ),
-    androidAllowWhileIdle: true,
-    uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+        id,
+        'Hello! It\'s your Plant Pal! 🌱',
+        'Some of your plants need watering today!',
+        scheduledDay,
+        const NotificationDetails(
+          android: androidPlatformChannelSpecifics,
+        ),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   removeTodaysNotification() async {
     DateTime today = tz.TZDateTime.now(tz.local);
-    int id = int.parse(today.day.toString() + today.month.toString() + today.year.toString());
+    int id = int.parse(
+        today.day.toString() + today.month.toString() + today.year.toString());
 
     await flutterLocalNotificationsPlugin.cancel(id);
   }
