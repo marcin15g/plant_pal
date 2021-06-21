@@ -13,36 +13,43 @@ class PlantDetails with ChangeNotifier {
   final bool vegetable;
   final bool edible;
   final String ediblePart;
+  final String author;
+  final String family;
+  final String genus;
 
-  PlantDetails({
-    this.id,
-    this.commonName,
-    this.scientificName,
-    this.imageUrl,
-    this.year,
-    this.images,
-    this.bibliography,
-    this.familyCommonName,
-    this.observations,
-    this.vegetable,
-    this.edible,
-    this.ediblePart
-  });
+  PlantDetails(
+      {this.id,
+      this.commonName,
+      this.scientificName,
+      this.imageUrl,
+      this.year,
+      this.images,
+      this.bibliography,
+      this.familyCommonName,
+      this.observations,
+      this.vegetable,
+      this.edible,
+      this.ediblePart,
+      this.author,
+      this.family,
+      this.genus});
 
   factory PlantDetails.fromJson(Map<String, dynamic> json) {
     return PlantDetails(
-      id: json['id'],
-      commonName: json['common_name'],
-      scientificName: json['scientific_name'],
-      imageUrl: json['image_url'],
-      year: json['year'],
-      images: json['images'],
-      bibliography: json['bibliography'],
-      familyCommonName: json['family_common_name'],
-      observations: json['observations'],
-      vegetable: json['vegetable'],
-      edible: json['edible'],
-      ediblePart: json['edible_part']
-    );
+        id: json['id'],
+        commonName: json['common_name'],
+        scientificName: json['scientific_name'],
+        imageUrl: json['main_species']['image_url'],
+        year: json['year'],
+        images: json['main_species']['images'],
+        bibliography: json['bibliography'],
+        familyCommonName: json['family_common_name'],
+        observations: json['observations'],
+        vegetable: json['vegetable'],
+        edible: json['edible'],
+        ediblePart: json['edible_part'],
+        author: json['author'],
+        family: json['main_species']['family'],
+        genus: json['main_species']['genus']);
   }
 }

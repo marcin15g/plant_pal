@@ -8,12 +8,7 @@ class PlantDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    // plantInfo.images.forEach((key, value) { 
-    //   print(key);
-    // });
-
-
+    print(plantInfo.imageUrl);
     return Stack(
       children: [
         Container(
@@ -61,19 +56,16 @@ class PlantDetailsWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  plantInfo.year == null
-                      ? infoRow("Year", plantInfo.year.toString(),
+                  plantInfo.author != null
+                      ? infoRow("Author", plantInfo.author.toString(),
                           Icons.calendar_today, context)
                       : SizedBox(),
-                  plantInfo.bibliography == null
-                      ? infoRow(
-                          "Bibliography",
-                          plantInfo.bibliography.toString(),
-                          Icons.book,
-                          context)
+                  plantInfo.family != null
+                      ? infoRow("Family", plantInfo.family.toString(),
+                          Icons.book, context)
                       : SizedBox(),
-                  plantInfo.familyCommonName != null
-                      ? infoRow("Family", plantInfo.familyCommonName.toString(),
+                  plantInfo.genus != null
+                      ? infoRow("Genus", plantInfo.genus.toString(),
                           Icons.supervised_user_circle_sharp, context)
                       : SizedBox(),
                   plantInfo.observations != null
@@ -84,15 +76,14 @@ class PlantDetailsWidget extends StatelessWidget {
                           context)
                       : SizedBox(),
                   Column(
-                    children: plantInfo.images.entries.map((e) {
-                      final title = e.key;
-                      final images = [];
-                      e.value.forEach((elem) {
-                        images.add(elem['image_url']);
-                      });
-                      return GallerySegment(title, images);
-                    }).toList()
-                  ),
+                      children: plantInfo.images.entries.map((e) {
+                    final title = e.key;
+                    final images = [];
+                    e.value.forEach((elem) {
+                      images.add(elem['image_url']);
+                    });
+                    return GallerySegment(title, images);
+                  }).toList()),
                 ],
               ),
             ),
@@ -104,6 +95,7 @@ class PlantDetailsWidget extends StatelessWidget {
 }
 
 getImage(String url) {
+  print(url);
   return url != null
       ? FadeInImage.assetNetwork(
           placeholder: 'assets/placeholder.jpg',

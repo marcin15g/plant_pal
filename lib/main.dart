@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await NotificationService().init();
-  
+
   runApp(MyApp());
 }
 
@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Plants()),
-        ChangeNotifierProvider(create: (_) => User()),
       ],
       child: MaterialApp(
         title: 'PlantPal',
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amber,
           canvasColor: Color.fromRGBO(255, 254, 229, 1),
           fontFamily: 'Patrick',
-          
         ),
         home: LoginScreen(),
         routes: {
